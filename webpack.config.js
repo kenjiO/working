@@ -22,7 +22,7 @@ module.exports = {
   module: {
     loaders: [{
       test: /\.js?$/,
-      loader: 'babel',
+      loader: 'babel-loader',
       include: path.join(__dirname, 'app'),
       query: {
         plugins: [
