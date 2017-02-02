@@ -1,33 +1,36 @@
+console.log(''); console.log('');console.log('');console.log('');console.log('');console.log('')
+import 'babel-polyfill'
 import React from 'react'
 import { render } from 'react-dom'
+import createLogger from 'redux-logger'
+import { createStore, applyMiddleware, compose} from 'redux'
+import thunkMiddleware from 'redux-thunk'
 import { Provider } from 'react-redux'
-import { createStore, applyMiddleware, compose } from 'redux'
-import thunk from 'redux-thunk';
 
-import reducers from './reducers/reducers'
-import App from './components/App'
+import { rootReducer } from './reducers'
+import App from './app'
+
 
 const enhancers = compose(
-    applyMiddleware(thunk),
+    applyMiddleware(thunkMiddleware),
     window.devToolsExtension ? window.devToolsExtension() : f => f
 )
 
-const initialState = {
-  todos: [
-    {id: 0, text: "item 1", completed: false}
-  ],
-  visibilityFilter: "SHOW_ALL"
-}
-
 const store = createStore(
-    reducers,
-    initialState,
+    rootReducer,
     enhancers
-);
-
-render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('root')
 )
+
+render (
+    <Provider store={store}>
+      <App />
+    </Provider>,
+    document.getElementById('root')
+)
+
+var foo = Symbol('foo')
+var bar = {[foo]: 99}
+
+console.dir(bar)
+console.log('----------')
+console.log(bar[foo])
