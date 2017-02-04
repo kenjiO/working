@@ -19,7 +19,27 @@ const common = {
     },
     devtool: '#source-map',
     devServer: {
-        outputPath: PATHS.build
+        outputPath: PATHS.build,
+        contentBase: 'public',
+        headers: { "Access-Control-Allow-Origin": "*" },
+        //access-control-allow-origin: http://localhost:8080
+        port: 8080,
+        // // Send API requests on localhost to API server get around CORS.
+        // proxy: {
+        //     '/api': {
+        //         target: {
+        //             host: "www.google.com",
+        //             protocol: 'https:',
+        //             secure: false,
+        //             port: 80
+        //         },
+        //         ignorePath: true,
+        //         changeOrigin: true,
+        //         pathRewrite: {
+        //             '^/api': ''
+        //         }
+        //     }
+        // }
     },
     plugins: [
         new WriteFilePlugin()
